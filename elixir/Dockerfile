@@ -10,7 +10,7 @@ WORKDIR /app
 
 # Install hex package manager
 RUN mix local.hex --force
-Run mix local.rebar --force
+RUN mix local.rebar --force
 
 # Compile the project
 RUN mix do compile

@@ -19,4 +19,6 @@ if [[ -z `psql -Atqc "\\list $POSTGRES_DATABASE"` ]]; then
   echo "Database $POSTGRES_DATABASE created."
 fi
 
+export SECRET_KEY_BASE=`mix phx.gen.secret`
+
 exec mix phx.server

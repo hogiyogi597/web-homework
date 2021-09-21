@@ -17,6 +17,12 @@ config :homework, Homework.Repo,
 # with webpack to recompile .js and .css sources.
 config :homework, HomeworkWeb.Endpoint,
   http: [port: System.get_env("PORT") || 8000],
+  secret_key_base:
+    System.get_env("SECRET_KEY_BASE") ||
+      raise("""
+      environment variable SECRET_KEY_BASE is missing.
+      You can generate one by calling: mix phx.gen.secret
+      """),
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
