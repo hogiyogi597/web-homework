@@ -89,7 +89,7 @@ defmodule Seed do
   def run do
     for n <- 1..@max_companies do
       %{id: company_id} =
-        Homework.Repo.insert!(%Company{name: "Company #{n}", credit_line: n * 100})
+        Homework.Repo.insert!(%Company{name: "Company #{n}", credit_line: n * 100_000_000})
 
       merchant =
         Homework.Repo.insert!(%Merchant{name: "Merchant #{n}", description: "Merchant #{n}"})

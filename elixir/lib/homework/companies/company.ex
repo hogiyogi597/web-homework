@@ -6,7 +6,6 @@ defmodule Homework.Companies.Company do
   schema "companies" do
     field(:name, :string)
     field(:credit_line, :integer)
-    # This should be credit_line - (total amount of transactions for company)
     field(:available_credit, :integer)
 
     timestamps()
