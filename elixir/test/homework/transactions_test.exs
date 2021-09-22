@@ -50,7 +50,7 @@ defmodule Homework.TransactionsTest do
         })
 
       valid_attrs = %{
-        amount: 42,
+        amount: 42.00,
         credit: true,
         debit: true,
         description: "some description",
@@ -60,7 +60,7 @@ defmodule Homework.TransactionsTest do
       }
 
       update_attrs = %{
-        amount: 43,
+        amount: 43.00,
         credit: false,
         debit: false,
         description: "some updated description",
@@ -104,7 +104,7 @@ defmodule Homework.TransactionsTest do
 
     test "list_transactions/1 returns all transactions", %{valid_attrs: valid_attrs} do
       transaction = transaction_fixture(valid_attrs)
-      assert Transactions.list_transactions([]) == [transaction]
+      assert Transactions.list_transactions([]) == [Transaction.convert_amount(transaction)]
     end
 
     test "get_transaction!/1 returns the transaction with given id", %{valid_attrs: valid_attrs} do
@@ -119,7 +119,7 @@ defmodule Homework.TransactionsTest do
       company1: company1
     } do
       assert {:ok, %Transaction{} = transaction} = Transactions.create_transaction(valid_attrs)
-      assert transaction.amount == 42
+      assert transaction.amount == 4200
       assert transaction.credit == true
       assert transaction.debit == true
       assert transaction.description == "some description"
@@ -146,7 +146,7 @@ defmodule Homework.TransactionsTest do
       assert {:ok, %Transaction{} = transaction} =
                Transactions.update_transaction(transaction, update_attrs)
 
-      assert transaction.amount == 43
+      assert transaction.amount == 4300
       assert transaction.credit == false
       assert transaction.debit == false
       assert transaction.description == "some updated description"

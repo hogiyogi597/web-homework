@@ -19,6 +19,23 @@ defmodule Homework.Transactions.Transaction do
     timestamps()
   end
 
+  def convert_amount(transaction) when is_float(transaction.amount) do
+    integer_amount =
+      Decimal.from_float(transaction.amount * 100) |> Decimal.round() |> Decimal.to_integer()
+
+    %{transaction | amount: integer_amount}
+  end
+
+  def convert_amount(transaction) when is_integer(transaction.amount) do
+    dollar_amount = transaction.amount / 100.0
+
+    %{transaction | amount: dollar_amount}
+  end
+
+  def convert_amount(transaction) when is_nil(transaction.amount) do
+    transaction
+  end
+
   @doc false
   def changeset(transaction, attrs) do
     transaction

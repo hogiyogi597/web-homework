@@ -26,13 +26,13 @@ For **junior engineers** complete any 1 of these objectives and include a basic 
    * fuzzy searching for a merchant by name
    * getting back transactions with an amount between `min` and `max` arguments
 
- * Write a new schema, queries, and mutations to add companies to the app
-   * users should belong to a company and we should require transactions to pass in a company_id
-   * company should have a `name`, `credit_line`, and `available_credit` which would be the `credit_line` minus the total amount of `transactions` for the company
+ * ~~Write a new schema, queries, and mutations to add companies to the app~~
+   * ~~users should belong to a company and we should require transactions to pass in a company_id~~
+   * ~~company should have a `name`, `credit_line`, and `available_credit` which would be the `credit_line` minus the total amount of `transactions` for the company~~
 
- * Seed the database.  Possible solutions include:
-   * Implement provided `seeds.ex` file
-   * Write a `.sql` file that can be ingested by the database
+ * ~~Seed the database.  Possible solutions include:~~
+   * ~~Implement provided `seeds.ex` file~~
+   * ~~Write a `.sql` file that can be ingested by the database~~
 
  * Write tests for the resolvers & mutations.
    * Testing that you can get information from the resolver queries
@@ -43,11 +43,11 @@ For **junior engineers** complete any 1 of these objectives and include a basic 
    * should return a `total_rows` (how many total rows exist)
    * Bonus: Make it a wrapper that all the schemas can tap into.
 
- * Allow the mutations to handle a decimal amount for transactions (the database stores it as cents)
-   * Mutations need to convert the Decimal amount to an Integer e.g. 24.68 becomes 2468
-   * The queries should convert the Integer amount to a Decimal e.g. 2468 becomes 24.68
+ * ~~Allow the mutations to handle a decimal amount for transactions (the database stores it as cents)~~
+   * ~~Mutations need to convert the Decimal amount to an Integer e.g. 24.68 becomes 2468~~
+   * ~~The queries should convert the Integer amount to a Decimal e.g. 2468 becomes 24.68~~
 
 ## Bonus points
- * Find the bug with transactions
- * Find the security issue
+ * ~~Find the bug with transactions~~
+ * ~~Find the security issue~~
  * Add/improve the docs and @spec to functions
