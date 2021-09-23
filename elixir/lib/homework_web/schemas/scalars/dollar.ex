@@ -1,4 +1,4 @@
-defmodule HomeworkWeb.CustomTypes.Dollar do
+defmodule HomeworkWeb.Scalars.Dollar do
   use Absinthe.Schema.Notation
 
   # Defining a custom scalar seems more appropriate for the dollar type instead of needing to remember to convert it everywhere like I had it before.

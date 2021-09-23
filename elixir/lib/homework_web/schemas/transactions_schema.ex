@@ -31,6 +31,17 @@ defmodule HomeworkWeb.Schemas.TransactionsSchema do
     end
   end
 
+  object :transactions do
+    field(:items, list_of(:transaction)) do
+      arg(:pagination, :pagination)
+      resolve(&TransactionsResolver.transactions/3)
+    end
+
+    field(:total_items, :integer) do
+      resolve(&TransactionsResolver.get_total/3)
+    end
+  end
+
   object :transaction_mutations do
     @desc "Create a new transaction"
     field :create_transaction, :transaction do

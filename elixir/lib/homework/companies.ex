@@ -7,6 +7,7 @@ defmodule Homework.Companies do
   alias Homework.Repo
 
   alias Homework.Companies.Company
+  alias Homework.Pagination
 
   @doc """
   Returns the list of companies.
@@ -17,8 +18,12 @@ defmodule Homework.Companies do
       [%Company{}, ...]
   
   """
-  def list_companies(_args) do
-    Repo.all(Company)
+  def list_companies(args) do
+    Pagination.handle_pagination(args, from(Company))
+  end
+
+  def get_total() do
+    Pagination.handle_total_items(from(Company))
   end
 
   @doc """

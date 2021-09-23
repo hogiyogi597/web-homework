@@ -5,7 +5,8 @@ defmodule HomeworkWeb.Schemas.Types do
   use Absinthe.Schema.Notation
 
   import_types(Absinthe.Type.Custom)
-  import_types(HomeworkWeb.CustomTypes.Dollar)
+  import_types(HomeworkWeb.Scalars.Dollar)
+  import_types(HomeworkWeb.Input.Pagination)
   import_types(HomeworkWeb.Schemas.CompaniesSchema)
   import_types(HomeworkWeb.Schemas.MerchantsSchema)
   import_types(HomeworkWeb.Schemas.TransactionsSchema)

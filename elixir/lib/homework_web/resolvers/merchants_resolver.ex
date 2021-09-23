@@ -8,6 +8,10 @@ defmodule HomeworkWeb.Resolvers.MerchantsResolver do
     {:ok, Merchants.list_merchants(args)}
   end
 
+  def get_total(_root, _args, _info) do
+    {:ok, Merchants.get_total()}
+  end
+
   @doc """
   Create a new merchant
   """

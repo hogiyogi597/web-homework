@@ -19,6 +19,17 @@ defmodule HomeworkWeb.Schemas.UsersSchema do
     end
   end
 
+  object :users do
+    field(:items, list_of(:user)) do
+      arg(:pagination, :pagination)
+      resolve(&UsersResolver.users/3)
+    end
+
+    field(:total_items, :integer) do
+      resolve(&UsersResolver.get_total/3)
+    end
+  end
+
   object :user_mutations do
     @desc "Create a new user"
     field :create_user, :user do

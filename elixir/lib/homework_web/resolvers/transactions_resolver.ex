@@ -11,6 +11,10 @@ defmodule HomeworkWeb.Resolvers.TransactionsResolver do
     {:ok, Transactions.list_transactions(args)}
   end
 
+  def get_total(_root, _args, _info) do
+    {:ok, Transactions.get_total()}
+  end
+
   @doc """
   Get the user associated with a transaction
   """

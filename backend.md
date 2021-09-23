@@ -38,10 +38,10 @@ For **junior engineers** complete any 1 of these objectives and include a basic 
    * Testing that you can get information from the resolver queries
    * Testing that you can get create/update/delete from the resolver mutations
 
- * Add a pagination layer to the queries
-   * should include a `limit` (how many rows to return) and `skip` (how many rows to skip) options
-   * should return a `total_rows` (how many total rows exist)
-   * Bonus: Make it a wrapper that all the schemas can tap into.
+ * ~~Add a pagination layer to the queries~~
+   * ~~should include a `limit` (how many rows to return) and `skip` (how many rows to skip) options~~
+   * ~~should return a `total_rows` (how many total rows exist)~~
+   * ~~Bonus: Make it a wrapper that all the schemas can tap into.~~
 
  * ~~Allow the mutations to handle a decimal amount for transactions (the database stores it as cents)~~
    * ~~Mutations need to convert the Decimal amount to an Integer e.g. 24.68 becomes 2468~~

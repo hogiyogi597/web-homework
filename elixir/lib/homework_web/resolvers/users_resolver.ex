@@ -9,6 +9,10 @@ defmodule HomeworkWeb.Resolvers.UsersResolver do
     {:ok, Users.list_users(args)}
   end
 
+  def get_total(_root, _args, _info) do
+    {:ok, Users.get_total()}
+  end
+
   @doc """
   Get the company associated with a user
   """

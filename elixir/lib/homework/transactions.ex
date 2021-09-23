@@ -7,6 +7,7 @@ defmodule Homework.Transactions do
   alias Homework.Repo
 
   alias Homework.Transactions.Transaction
+  alias Homework.Pagination
 
   @doc """
   Returns the list of transactions.
@@ -17,8 +18,12 @@ defmodule Homework.Transactions do
       [%Transaction{}, ...]
   
   """
-  def list_transactions(_args) do
-    Repo.all(Transaction)
+  def list_transactions(args) do
+    Pagination.handle_pagination(args, from(Transaction))
+  end
+
+  def get_total() do
+    Pagination.handle_total_items(from(Transaction))
   end
 
   @doc """

@@ -8,6 +8,10 @@ defmodule HomeworkWeb.Resolvers.CompaniesResolver do
     {:ok, Companies.list_companies(args)}
   end
 
+  def get_total(_root, _args, _info) do
+    {:ok, Companies.get_total()}
+  end
+
   @doc """
   Create a new company
   """
