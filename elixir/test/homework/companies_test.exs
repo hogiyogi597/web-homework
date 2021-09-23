@@ -6,13 +6,12 @@ defmodule Homework.CompaniesTest do
   describe "companies" do
     alias Homework.Companies.Company
 
-    @valid_attrs %{name: "some name", credit_line: 100, available_credit: 100}
+    @valid_attrs %{name: "some name", credit_line: 100}
     @update_attrs %{
       name: "some updated name",
-      credit_line: 200,
-      available_credit: 200
+      credit_line: 200
     }
-    @invalid_attrs %{name: nil, credit_line: nil, available_credit: nil}
+    @invalid_attrs %{name: nil, credit_line: nil}
 
     def company_fixture(attrs \\ %{}) do
       {:ok, company} =
@@ -37,7 +36,6 @@ defmodule Homework.CompaniesTest do
       assert {:ok, %Company{} = company} = Companies.create_company(@valid_attrs)
       assert company.name == "some name"
       assert company.credit_line == 100
-      assert company.available_credit == 100
     end
 
     test "create_company/1 with invalid data returns error changeset" do
@@ -49,7 +47,6 @@ defmodule Homework.CompaniesTest do
       assert {:ok, %Company{} = company} = Companies.update_company(company, @update_attrs)
       assert company.name == "some updated name"
       assert company.credit_line == 200
-      assert company.available_credit == 200
     end
 
     test "update_company/2 with invalid data returns error changeset" do
@@ -67,6 +64,20 @@ defmodule Homework.CompaniesTest do
     test "change_company/1 returns a company changeset" do
       company = company_fixture()
       assert %Ecto.Changeset{} = Companies.change_company(company)
+    end
+
+    test "calculate_available_credit/2 returns the correct value" do
+      credit_line = 1000
+      total_transaction_amount = 273
+      assert 727 == Companies.calculate_available_credit(credit_line, total_transaction_amount)
+    end
+
+    test "calculate_available_credit/2 returns credit_limit when there are no company transactions" do
+      credit_line = 1000
+      total_transaction_amount = nil
+
+      assert credit_line ==
+               Companies.calculate_available_credit(credit_line, total_transaction_amount)
     end
   end
 end

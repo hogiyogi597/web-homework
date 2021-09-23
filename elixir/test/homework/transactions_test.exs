@@ -22,15 +22,13 @@ defmodule Homework.TransactionsTest do
       {:ok, company1} =
         Companies.create_company(%{
           name: "some name",
-          credit_line: 1000,
-          available_credit: 1000
+          credit_line: 1000
         })
 
       {:ok, company2} =
         Companies.create_company(%{
           name: "some name",
-          credit_line: 2000,
-          available_credit: 2000
+          credit_line: 2000
         })
 
       {:ok, user1} =
@@ -99,12 +97,12 @@ defmodule Homework.TransactionsTest do
         |> Enum.into(valid_attrs)
         |> Transactions.create_transaction()
 
-      transaction
+      Transaction.convert_amount(transaction)
     end
 
     test "list_transactions/1 returns all transactions", %{valid_attrs: valid_attrs} do
       transaction = transaction_fixture(valid_attrs)
-      assert Transactions.list_transactions([]) == [Transaction.convert_amount(transaction)]
+      assert Transactions.list_transactions([]) == [transaction]
     end
 
     test "get_transaction!/1 returns the transaction with given id", %{valid_attrs: valid_attrs} do

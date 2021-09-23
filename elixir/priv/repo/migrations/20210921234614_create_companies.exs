@@ -6,7 +6,6 @@ defmodule Homework.Repo.Migrations.CreateCompanies do
       add(:id, :uuid, primary_key: true)
       add(:name, :string)
       add(:credit_line, :integer)
-      add(:available_credit, :integer)
 
       timestamps()
     end

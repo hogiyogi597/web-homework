@@ -11,15 +11,13 @@ defmodule Homework.UsersTest do
       {:ok, company1} =
         Companies.create_company(%{
           name: "some name",
-          credit_line: 1000,
-          available_credit: 1000
+          credit_line: 1000
         })
 
       {:ok, company2} =
         Companies.create_company(%{
           name: "some name",
-          credit_line: 2000,
-          available_credit: 2000
+          credit_line: 2000
         })
 
       valid_attrs = %{

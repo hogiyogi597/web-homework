@@ -101,4 +101,22 @@ defmodule Homework.Companies do
   def change_company(%Company{} = company, attrs \\ %{}) do
     Company.changeset(company, attrs)
   end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking company changes.
+  
+  ## Examples
+  
+      iex> change_company(company)
+      %Ecto.Changeset{data: %Company{}}
+  
+  """
+  def calculate_available_credit(credit_line, total_transaction_amount)
+      when is_nil(total_transaction_amount) do
+    credit_line
+  end
+
+  def calculate_available_credit(credit_line, total_transaction_amount) do
+    Company.calculate_available_credit(credit_line, total_transaction_amount)
+  end
 end
