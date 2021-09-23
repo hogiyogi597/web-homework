@@ -48,7 +48,7 @@ defmodule Homework.TransactionsTest do
         })
 
       valid_attrs = %{
-        amount: 42.00,
+        amount: 4200,
         credit: true,
         debit: true,
         description: "some description",
@@ -58,7 +58,7 @@ defmodule Homework.TransactionsTest do
       }
 
       update_attrs = %{
-        amount: 43.00,
+        amount: 4300,
         credit: false,
         debit: false,
         description: "some updated description",
@@ -97,7 +97,7 @@ defmodule Homework.TransactionsTest do
         |> Enum.into(valid_attrs)
         |> Transactions.create_transaction()
 
-      Transaction.convert_amount(transaction)
+      transaction
     end
 
     test "list_transactions/1 returns all transactions", %{valid_attrs: valid_attrs} do

@@ -18,7 +18,7 @@ defmodule Homework.Transactions do
   
   """
   def list_transactions(_args) do
-    Repo.all(Transaction) |> Enum.map(&Transaction.convert_amount/1)
+    Repo.all(Transaction)
   end
 
   @doc """
@@ -36,7 +36,7 @@ defmodule Homework.Transactions do
   
   """
   def get_transaction!(id) do
-    Repo.get!(Transaction, id) |> Transaction.convert_amount()
+    Repo.get!(Transaction, id)
   end
 
   @doc """
@@ -53,7 +53,7 @@ defmodule Homework.Transactions do
   """
   def create_transaction(attrs \\ %{}) do
     %Transaction{}
-    |> Transaction.changeset(Transaction.convert_amount(attrs))
+    |> Transaction.changeset(attrs)
     |> Repo.insert()
   end
 
@@ -71,7 +71,7 @@ defmodule Homework.Transactions do
   """
   def update_transaction(%Transaction{} = transaction, attrs) do
     transaction
-    |> Transaction.changeset(Transaction.convert_amount(attrs))
+    |> Transaction.changeset(attrs)
     |> Repo.update()
   end
 

@@ -16,9 +16,36 @@ alias Homework.Transactions.Transaction
 alias Homework.Users.User
 
 defmodule Seed do
-  @max_companies 10
-  @max_users_per_company 2
-  @max_transactions_per_user 5
+  default_args = %{number_of_companies: 10, users_upper_bound: 2, transactions_upper_bound: 5}
+
+  args = System.argv()
+
+  %{
+    number_of_companies: number_of_companies,
+    users_upper_bound: users_upper_bound,
+    transactions_upper_bound: transactions_upper_bound
+  } =
+    case args |> Enum.map(&String.to_integer/1) do
+      [num_companies | [users_ub | [transactions_ub | _tail]]] ->
+        %{
+          number_of_companies: num_companies,
+          users_upper_bound: users_ub,
+          transactions_upper_bound: transactions_ub
+        }
+
+      [num_companies | [users_ub | _tail]] ->
+        %{default_args | number_of_companies: num_companies, users_upper_bound: users_ub}
+
+      [num_companies | _tail] ->
+        %{default_args | number_of_companies: num_companies}
+
+      _ ->
+        default_args
+    end
+
+  @max_companies number_of_companies
+  @max_users_per_company users_upper_bound
+  @max_transactions_per_user transactions_upper_bound
 
   @user_first_names [
     "Casey",
@@ -56,7 +83,7 @@ defmodule Seed do
   def generate_users_for_company(company_id) do
     users_per_company = Enum.random(1..@max_users_per_company)
 
-    for u <- 1..users_per_company do
+    for _ <- 1..users_per_company do
       Homework.Repo.insert!(%User{
         first_name: Enum.random(@user_first_names),
         last_name: Enum.random(@user_last_names),
@@ -89,7 +116,7 @@ defmodule Seed do
   def run do
     for n <- 1..@max_companies do
       %{id: company_id} =
-        Homework.Repo.insert!(%Company{name: "Company #{n}", credit_line: n * 100_000_000})
+        Homework.Repo.insert!(%Company{name: "Company #{n}", credit_line: n * 100_000})
 
       merchant =
         Homework.Repo.insert!(%Merchant{name: "Merchant #{n}", description: "Merchant #{n}"})
@@ -103,6 +130,10 @@ defmodule Seed do
             )
     end
   end
+
+  IO.puts(
+    "Setup DB seeds file with number_of_companies: #{number_of_companies} | users_upper_bound: #{users_upper_bound} | transactions_upper_bound: #{transactions_upper_bound}"
+  )
 end
 
 Seed.run()
