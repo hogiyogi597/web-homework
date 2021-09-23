@@ -25,6 +25,19 @@ defmodule HomeworkWeb.Schemas.MerchantsSchema do
     end
   end
 
+  object :merchant_queries do
+    @desc "Get a Merchant by its id"
+    field(:merchant, :merchant) do
+      arg(:id, non_null(:id))
+      resolve(&MerchantsResolver.merchant/3)
+    end
+
+    @desc "Get all Merchants"
+    field(:merchants, :merchants) do
+      resolve(fn _, _ -> {:ok, %{}} end)
+    end
+  end
+
   object :merchant_mutations do
     @desc "Create a new merchant"
     field :create_merchant, :merchant do

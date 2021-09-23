@@ -13,6 +13,14 @@ defmodule HomeworkWeb.Resolvers.MerchantsResolver do
   end
 
   @doc """
+  Get a merchant by its id
+  """
+  def merchant(_root, %{id: id}, _info) do
+    {:ok, Merchants.get_merchant(id)}
+  end
+
+
+  @doc """
   Create a new merchant
   """
   def create_merchant(_root, args, _info) do

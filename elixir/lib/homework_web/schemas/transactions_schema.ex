@@ -42,6 +42,19 @@ defmodule HomeworkWeb.Schemas.TransactionsSchema do
     end
   end
 
+  object :transaction_queries do
+    @desc "Get a Transaction by its id"
+    field(:transaction, :transaction) do
+      arg(:id, non_null(:id))
+      resolve(&TransactionsResolver.transaction/3)
+    end
+
+    @desc "Get all Transactions"
+    field(:transactions, :transactions) do
+      resolve(fn _, _ -> {:ok, %{}} end)
+    end
+  end
+
   object :transaction_mutations do
     @desc "Create a new transaction"
     field :create_transaction, :transaction do

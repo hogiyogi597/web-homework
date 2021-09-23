@@ -8,8 +8,18 @@ defmodule HomeworkWeb.Resolvers.CompaniesResolver do
     {:ok, Companies.list_companies(args)}
   end
 
+  @doc """
+  Get the total count of companies
+  """
   def get_total(_root, _args, _info) do
     {:ok, Companies.get_total()}
+  end
+
+  @doc """
+  Get a company by its id
+  """
+  def company(_root, %{id: id}, _info) do
+    {:ok, Companies.get_company(id)}
   end
 
   @doc """

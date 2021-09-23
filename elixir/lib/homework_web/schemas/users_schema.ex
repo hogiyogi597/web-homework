@@ -14,8 +14,8 @@ defmodule HomeworkWeb.Schemas.UsersSchema do
     field(:inserted_at, :naive_datetime)
     field(:updated_at, :naive_datetime)
 
-    field(:company, :company) do
-      resolve(&UsersResolver.company/3)
+    field(:user, :user) do
+      resolve(&UsersResolver.user/3)
     end
   end
 
@@ -29,6 +29,20 @@ defmodule HomeworkWeb.Schemas.UsersSchema do
       resolve(&UsersResolver.get_total/3)
     end
   end
+
+  object :user_queries do
+    @desc "Get a User by its id"
+    field(:user, :user) do
+      arg(:id, non_null(:id))
+      resolve(&UsersResolver.user/3)
+    end
+
+    @desc "Get all Users"
+    field(:users, :users) do
+      resolve(fn _, _ -> {:ok, %{}} end)
+    end
+  end
+
 
   object :user_mutations do
     @desc "Create a new user"

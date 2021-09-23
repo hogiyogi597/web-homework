@@ -31,6 +31,19 @@ defmodule HomeworkWeb.Schemas.CompaniesSchema do
     end
   end
 
+  object :company_queries do
+    @desc "Get a Company by its id"
+    field(:company, :company) do
+      arg(:id, non_null(:id))
+      resolve(&CompaniesResolver.company/3)
+    end
+
+    @desc "Get all Companies"
+    field(:companies, :companies) do
+      resolve(fn _, _ -> {:ok, %{}} end)
+    end
+  end
+
   object :company_mutations do
     @desc "Create a new company"
     field :create_company, :company do
