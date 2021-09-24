@@ -5,7 +5,6 @@ defmodule HomeworkWeb.Schemas.CompaniesSchema do
   use Absinthe.Schema.Notation
 
   alias HomeworkWeb.Resolvers.CompaniesResolver
-  alias HomeworkWeb.Resolvers.TransactionsResolver
 
   object :company do
     field(:id, non_null(:id))
@@ -13,7 +12,7 @@ defmodule HomeworkWeb.Schemas.CompaniesSchema do
     field(:credit_line, :dollar)
 
     field(:available_credit, :dollar) do
-      resolve(&TransactionsResolver.calculate_available_credit/3)
+      resolve(&CompaniesResolver.calculate_available_credit/3)
     end
 
     field(:inserted_at, :naive_datetime)

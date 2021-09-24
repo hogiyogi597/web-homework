@@ -1,5 +1,6 @@
 defmodule HomeworkWeb.Resolvers.CompaniesResolver do
   alias Homework.Companies
+  alias Homework.Transactions
 
   @doc """
   Get a list of companies
@@ -63,5 +64,14 @@ defmodule HomeworkWeb.Resolvers.CompaniesResolver do
       error ->
         {:error, "could not update company: #{inspect(error)}"}
     end
+  end
+
+  @doc """
+  Calculates the available credit of a company by summing the transaction amounts
+  and subtracting that from the company's credit_line
+  """
+  def calculate_available_credit(%{id: company_id, credit_line: credit_line}, _args, _info) do
+    total_transaction_amount = Transactions.accumulate_company_transactions(company_id)
+    {:ok, Companies.calculate_available_credit(credit_line, total_transaction_amount)}
   end
 end
