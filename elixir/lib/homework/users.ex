@@ -8,6 +8,7 @@ defmodule Homework.Users do
 
   alias Homework.Users.User
   alias Homework.Pagination
+  alias Homework.Search
 
   @doc """
   Returns the list of users.
@@ -19,7 +20,8 @@ defmodule Homework.Users do
 
   """
   def list_users(args) do
-    Pagination.handle_pagination(args, from(User))
+    search_query = Search.fuzzy_search(args, User)
+    Pagination.handle_pagination(args, search_query)
   end
 
   def get_total() do

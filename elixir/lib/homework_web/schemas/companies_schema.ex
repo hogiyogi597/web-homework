@@ -20,9 +20,14 @@ defmodule HomeworkWeb.Schemas.CompaniesSchema do
     field(:updated_at, :naive_datetime)
   end
 
+  input_object :search_company do
+    field(:name, :string)
+  end
+
   object :companies do
     field(:items, list_of(:company)) do
       arg(:pagination, :pagination)
+      arg(:search, :search_company)
       resolve(&CompaniesResolver.companies/3)
     end
 

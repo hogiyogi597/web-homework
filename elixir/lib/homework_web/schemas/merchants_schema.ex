@@ -14,9 +14,14 @@ defmodule HomeworkWeb.Schemas.MerchantsSchema do
     field(:updated_at, :naive_datetime)
   end
 
+  input_object :search_merchant do
+    field(:name, :string)
+  end
+
   object :merchants do
     field(:items, list_of(:merchant)) do
       arg(:pagination, :pagination)
+      arg(:search, :search_merchant)
       resolve(&MerchantsResolver.merchants/3)
     end
 

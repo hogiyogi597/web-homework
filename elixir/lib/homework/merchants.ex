@@ -8,6 +8,7 @@ defmodule Homework.Merchants do
 
   alias Homework.Merchants.Merchant
   alias Homework.Pagination
+  alias Homework.Search
 
   @doc """
   Returns the list of merchants.
@@ -19,7 +20,8 @@ defmodule Homework.Merchants do
 
   """
   def list_merchants(args) do
-    Pagination.handle_pagination(args, from(Merchant))
+    search_query = Search.fuzzy_search(args, Merchant)
+    Pagination.handle_pagination(args, search_query)
   end
 
   def get_total() do

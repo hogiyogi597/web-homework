@@ -8,6 +8,7 @@ defmodule Homework.Companies do
 
   alias Homework.Companies.Company
   alias Homework.Pagination
+  alias Homework.Search
 
   @doc """
   Returns the list of companies.
@@ -19,7 +20,8 @@ defmodule Homework.Companies do
 
   """
   def list_companies(args) do
-    Pagination.handle_pagination(args, from(Company))
+    search_query = Search.fuzzy_search(args, Company)
+    Pagination.handle_pagination(args, search_query)
   end
 
   def get_total() do

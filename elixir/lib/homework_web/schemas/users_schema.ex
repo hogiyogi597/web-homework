@@ -19,9 +19,15 @@ defmodule HomeworkWeb.Schemas.UsersSchema do
     end
   end
 
+  input_object :search_user do
+    field(:first_name, :string)
+    field(:last_name, :string)
+  end
+
   object :users do
     field(:items, list_of(:user)) do
       arg(:pagination, :pagination)
+      arg(:search, :search_user)
       resolve(&UsersResolver.users/3)
     end
 
